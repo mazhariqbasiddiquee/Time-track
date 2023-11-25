@@ -10,14 +10,19 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-
-    // createdBy: { type: Schema.Types.ObjectId, ref: "user" },
-
+     email: {
+      type: String,
+      required: true,
+    }
+    
   },
-  { timestamps: true }
+  {
+    timestamps: {
+      currentTime: () => new Date(),
+    },
+  }
 );
+
 
 const ProjectModel = mongoose.model("project", projectSchema);
 

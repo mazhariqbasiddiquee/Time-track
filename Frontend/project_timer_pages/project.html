@@ -173,7 +173,9 @@
     const modalCreateProjectForm = document.getElementById(
       "modalCreateProjectForm"
     );
-
+           
+    // let response=JSON.parse(localStorage.getItem("name"))
+      // console.log(response.accessToken)
     // create Project
 
     const createProject = () => {
@@ -182,25 +184,28 @@
         description: document.getElementById("project_description").value,
       };
 
-      fetch("http://localhost:9090/project/create", {
+      fetch("http://localhost:3300/project/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "authorization":JSON.stringify(response.accessToken)
         },
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
         .then((res) => {
           if (res) {
-            fetch("http://localhost:9090/project/", {
+            fetch("http://localhost:3300/project/", {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
+               
               },
             })
               .then((res) => res.json())
               .then((res) => {
                 console.log(res);
+                alert("project created")
                 displayProjectDetails(res.projects);
               });
           }
@@ -217,10 +222,11 @@
       };
       console.log(data);
 
-      fetch("http://localhost:9090/task/create", {
+      fetch("http://localhost:3300/task/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // "authorization":JSON.stringify(response.accessToken)
         },
         body: JSON.stringify(data),
       })
@@ -234,10 +240,11 @@
     };
 
     window.onload = () => {
-      fetch("http://localhost:9090/project/", {
+      fetch("http://localhost:3300/project/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          // "authorization":JSON.stringify(response.accessToken)
         },
       })
         .then((res) => res.json())
@@ -262,7 +269,7 @@
         descriptionCell.textContent = project.description;
 
         const createdByCell = document.createElement("td");
-        createdByCell.textContent = "ankita";
+        createdByCell.textContent = "mazhar";
 
         const createdAtCell = document.createElement("td");
         createdAtCell.textContent = dayjs(project.createdAt).format(
@@ -305,6 +312,7 @@
 
     let logout = document.querySelector(".logoutBtn");
     logout.addEventListener("click", () => {
+      localStorage.removeItem("name")
       window.location.href = "../homepage/index.html";
     });
   </script>

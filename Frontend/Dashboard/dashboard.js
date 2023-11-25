@@ -311,7 +311,7 @@ data1.length = dateRangefordata1;
 console.log(data1.length, dateRangefordata1);
 
 fetch(
-  `http://localhost:9090/timer/data/${formattedStartDate}/${formattedEndDate}`
+  `http://localhost:3300/timer/data/${formattedStartDate}/${formattedEndDate}`
 )
   .then((res) => {
     return res.json();
@@ -367,13 +367,16 @@ $(function () {
       let startdate1 = start.format("YYYY-MM-DD");
       let enddate1 = end.format("YYYY-MM-DD");
 
-      fetch(`http://localhost:9090/timer/data/${startdate1}/${enddate1}`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: localStorage.getItem("token"),
-        },
-      })
+      fetch(
+        `http://localhost:3300/timer/data/${startdate1}/${enddate1}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+       
+          },
+        }
+      )
         .then((res) => {
           return res.json();
         })
@@ -394,6 +397,7 @@ let totalhrs = document.getElementById("durationContainer");
 
 function appenddata(data) {
   let sum = 0;
+ console.log(data)
 
   table.innerHTML = "";
 
@@ -402,14 +406,14 @@ function appenddata(data) {
   let p = document.createElement("p");
   let p1 = document.createElement("p");
   let p2 = document.createElement("p");
-  let p3 = document.createElement("p");
+
 
   p.innerText = "Title";
-  p1.innerText = "Duration";
-  p2.innerText = "Amount";
-  p3.innerText = "Percentage";
+  p1.innerText = "Description";
+  p2.innerText = "Created";
 
-  headingdiv.append(p, p1, p2, p3);
+
+  headingdiv.append(p, p1, p2);
   table.append(headingdiv);
 
   data.forEach((data) => {
@@ -427,6 +431,8 @@ function appenddata(data) {
     console.log(result);
     console.log(data1.length);
 
+    for(let i=0;i<data.tasks.length;i++){
+
     let contentdiv = document.createElement("div");
     contentdiv.classList.add("table-content");
 
@@ -435,19 +441,23 @@ function appenddata(data) {
     let p3 = document.createElement("p");
     let p4 = document.createElement("p");
 
-    p1.innerText = "name";
+    p1.innerText = data.tasks[i][0].name;
 
     // const formattedTime = convertMsToHMS(data.timers[j].duration);
-    p2.innerText = "name";
+    p2.innerText = data.tasks[i][0].description;
 
-    // const seconds = convertMsToSeconds(data.timers[j].duration);
-    // const percentage = convertSecondsToPercentage(seconds);
+    
+    const timestamp = data.tasks[i][0].createdAt;
+    const date = new Date(timestamp);
+    
+    // Convert to a human-readable format
+    const formattedDate = date.toLocaleString();
+  
+    p3.innerText = formattedDate;
 
-    p3.innerText = "0";
-    p4.innerText = "name";
-
-    contentdiv.append(p1, p2, p3, p4);
+    contentdiv.append(p1, p2, p3);
     table.append(contentdiv);
+    }
 
     sum += data.totalDuration;
   });
@@ -465,4 +475,16 @@ function appenddata(data) {
   console.log(averageDurationPercentage);
 
   avg(averageDurationPercentage);
+}
+
+
+
+function formatDuration(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedDuration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  
+  return formattedDuration;
 }

@@ -6,10 +6,12 @@ const projectRoute = express.Router();
 // Create a new project
 projectRoute.post("/create", async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { name, description ,email} = req.body;
+    // console.log(createdBy)
     const project = new ProjectModel({
       name,
       description,
+      email
     });
 
     await project.save();

@@ -30,8 +30,8 @@
       </div>
 
       <div class="features_quote_2">
-        <button class="featureQuoteBtn">Time Tracking</button>
-        <button class="featureQuoteBtn">Report Analysis</button>
+        <button class="featureQuoteBtn" id="time">Time Tracking</button>
+        <button class="featureQuoteBtn" id="report">Report Analysis</button>
       </div>
     </div>
     <div class="report_analysis">
@@ -123,5 +123,33 @@
     registerBtn.addEventListener("click", () => {
       window.location.href = "../login_signup_pages/register.html";
     });
+         
+    document.querySelector("#time").addEventListener("click", () => {
+
+      if(localStorage.getItem("name")!==null){
+        window.location.href = "../project_timer_pages/project.html";
+       }
+       else{
+        alert("please login first")
+        window.location.href="../login_signup_pages/login.html"
+       }
+      
+      
+    });
+         
+    document.querySelector("#report").addEventListener("click", () => {
+      console.log(localStorage.getItem("name"))
+
+       if(localStorage.getItem("name")!==null){
+       window.location.href = "../dashboard/dashboard.html";
+       }
+       else{
+        alert("please login first")
+        window.location.href="../login_signup_pages/login.html"
+       }
+    });
+    
+
+
   </script>
 </html>

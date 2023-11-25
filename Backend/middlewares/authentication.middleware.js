@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 
 const authenticate = async(req,res,next)=>{
     try {
-        const token = req?.cookies.accessToken
-   
+         const token = req?.cookies.accessToken
+              console.log(token)
 
         const isTokenValid = jwt.verify(token, process.env.accessSecretKey)
 
@@ -13,7 +13,7 @@ const authenticate = async(req,res,next)=>{
         }
 
         req.userId = isTokenValid.userId
-        req.email = isTokenValid.email
+        req.body.email = isTokenValid.email
         next()
     } catch (error) {
         return res.status(400).send({error: error.message})

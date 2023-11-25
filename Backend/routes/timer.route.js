@@ -74,9 +74,9 @@ timerRoute.get("/data/:start/:end", async (req, res) => {
     {
       $lookup: {
         from: "tasks", // Replace "tasks" with the actual name of the TaskModel collection
-        localField: "taskId",
-        foreignField: "_id",
-        as: "task",
+        localField: "_id",
+        foreignField: "timerId",
+        as: "tasks", // Change the field name to "tasks" to represent an array of tasks
       },
     },
     {
@@ -84,7 +84,7 @@ timerRoute.get("/data/:start/:end", async (req, res) => {
         _id: { $dateToString: { format: "%Y-%m-%d", date: "$startTime" } },
         totalDuration: { $sum: "$duration" },
         count: { $sum: 1 },
-        tasks: { $first: "$task" }, // Include the "task" field from the first document in each group
+        tasks: { $push: "$tasks" }, // Use $push to create an array of tasks for each group
       },
     },
     {
