@@ -311,7 +311,7 @@ data1.length = dateRangefordata1;
 console.log(data1.length, dateRangefordata1);
 
 fetch(
-  `http://localhost:3300/timer/data/${formattedStartDate}/${formattedEndDate}`
+  `https://time-track1.onrender.com/timer/data/${formattedStartDate}/${formattedEndDate}`
 )
   .then((res) => {
     return res.json();
@@ -368,7 +368,7 @@ $(function () {
       let enddate1 = end.format("YYYY-MM-DD");
 
       fetch(
-        `http://localhost:3300/timer/data/${startdate1}/${enddate1}`,
+        `https://time-track1.onrender.com/timer/data/${startdate1}/${enddate1}`,
         {
           method: "GET",
           headers: {
