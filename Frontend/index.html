@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Time Trace</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./homepage/style.css" />
   </head>
   <body>
     <!-- navbar -->
     <nav>
-      <div><img class="logo" src="./images/logo2.png" alt="logo" /></div>
+      <div><img class="logo" src="./homepage/images/logo2.png" alt="logo" /></div>
       <div class="signIn_register_button">
         <button class="signInBtn">Sign in</button>
         <button class="RegiterBtn">Try Time Trace free</button>
@@ -46,7 +46,7 @@
         <button class="report_analysis_Btn">Time Trace Free</button>
       </div>
       <div class="flex-grow-1 time_tracking_image">
-        <img src="./images/Screenshot 2023-06-18 200031.png" alt="" />;
+        <img src="./homepage/images/Screenshot 2023-06-18 200031.png" alt="" />;
       </div>
     </div>
 
@@ -64,7 +64,7 @@
         <button class="report_analysis_Btn">Time Trace Free</button>
       </div>
       <div class="flex-grow-1 time_tracking_image">
-        <img src="./images/Screenshot 2023-06-18 200126.png" alt="" />;
+        <img src="./homepage/images/Screenshot 2023-06-18 200126.png" alt="" />;
       </div>
     </div>
 
@@ -115,23 +115,23 @@
   <script>
     let signInBtn = document.querySelector(".signInBtn");
     signInBtn.addEventListener("click", () => {
-      window.location.href = "../login_signup_pages/login.html";
+      window.location.href = "./login_signup_pages/login.html";
     });
 
     let registerBtn = document.querySelector(".RegiterBtn");
 
     registerBtn.addEventListener("click", () => {
-      window.location.href = "../login_signup_pages/register.html";
+      window.location.href = "./login_signup_pages/register.html";
     });
          
     document.querySelector("#time").addEventListener("click", () => {
 
       if(localStorage.getItem("name")!==null){
-        window.location.href = "../project_timer_pages/project.html";
+        window.location.href = "./project_timer_pages/project.html";
        }
        else{
         alert("please login first")
-        window.location.href="../login_signup_pages/login.html"
+        window.location.href="./login_signup_pages/login.html"
        }
       
       
@@ -141,11 +141,11 @@
       console.log(localStorage.getItem("name"))
 
        if(localStorage.getItem("name")!==null){
-       window.location.href = "../dashboard/dashboard.html";
+       window.location.href = "./dashboard/dashboard.html";
        }
        else{
         alert("please login first")
-        window.location.href="../login_signup_pages/login.html"
+        window.location.href="./login_signup_pages/login.html"
        }
     });
     

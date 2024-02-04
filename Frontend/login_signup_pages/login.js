@@ -34,14 +34,16 @@ const onlogin = async () => {
       },
     });
     let res = await responce.json();
-    console.log("res", res);
-
+   
+     localStorage.setItem("name",res.isUserPresent.name)
+     localStorage.setItem("response",res.accessToken)
+     localStorage.setItem("email",res.isUserPresent.email)
     alert(res.message);
     if(res.message==="login successfull"){
 
      
-      window.location.href =
-      "http://127.0.0.1:5501/Frontend/project_timer_pages/project.html";
+       window.location.href =
+       "../project_timer_pages/project.html";
 
     }
    

@@ -182,13 +182,14 @@
       const data = {
         name: document.getElementById("project_name").value,
         description: document.getElementById("project_description").value,
+        email:localStorage.getItem("email")
       };
 
       fetch("https://time-track1.onrender.com/project/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "authorization":JSON.stringify(response.accessToken)
+          // "authorization":JSON.stringify(response.accessToken)
         },
         body: JSON.stringify(data),
       })
@@ -204,9 +205,16 @@
             })
               .then((res) => res.json())
               .then((res) => {
-                console.log(res);
+                if(res.statue==200){
+                  console.log(res);
                 alert("project created")
                 displayProjectDetails(res.projects);
+
+                }
+                else{
+                  alert("some error occured")
+                }
+            
               });
           }
         })
@@ -226,7 +234,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // "authorization":JSON.stringify(response.accessToken)
+          
         },
         body: JSON.stringify(data),
       })
@@ -269,7 +277,7 @@
         descriptionCell.textContent = project.description;
 
         const createdByCell = document.createElement("td");
-        createdByCell.textContent = "mazhar";
+        createdByCell.textContent = localStorage.getItem("name");
 
         const createdAtCell = document.createElement("td");
         createdAtCell.textContent = dayjs(project.createdAt).format(
@@ -313,7 +321,7 @@
     let logout = document.querySelector(".logoutBtn");
     logout.addEventListener("click", () => {
       localStorage.removeItem("name")
-      window.location.href = "../homepage/index.html";
+      window.location.href = "../index.html";
     });
   </script>
 </html>

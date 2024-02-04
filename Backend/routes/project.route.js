@@ -8,6 +8,7 @@ projectRoute.post("/create", async (req, res) => {
   try {
     const { name, description ,email} = req.body;
     // console.log(createdBy)
+    console.log(req.body)
     const project = new ProjectModel({
       name,
       description,

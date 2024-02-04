@@ -488,3 +488,7 @@ function formatDuration(seconds) {
   
   return formattedDuration;
 }
+
+function Home(){
+  window.location.href="../index.html"
+}
